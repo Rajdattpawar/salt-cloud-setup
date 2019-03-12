@@ -1,0 +1,3 @@
+php-zip:
+  pkg:
+    - installed

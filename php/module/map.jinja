@@ -1,0 +1,13 @@
+{% set lookup = salt['grains.filter_by']({
+    'trusty': {
+        'esl.so': 'esl-php5.so',
+        'excel.so': 'excel-php5.so',
+        'libxl.so': 'libxl-php5.so',
+    },
+    'xenial': {
+        'esl.so': 'esl-php7.so',
+        'excel.so': 'excel-php7.so',
+        'libxl.so': 'libxl-php7.so',
+        'libxl.so': 'libxl-php7.so',
+    },
+}, grain='oscodename', merge=salt['pillar.get']('phpmodules:lookup')) %}

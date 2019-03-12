@@ -1,0 +1,3 @@
+php-xml:
+  pkg:
+    - installed

@@ -1,0 +1,52 @@
+{% set entrata_directives = {
+  'max_execution_time': '300',
+  'memory_limit': '4096M',
+  'post_max_size': '50M',
+  'upload_max_filesize': '50M',
+  'session.gc_maxlifetime': '18000',
+  'max_input_vars': '150000',
+  'newrelic.browser_monitoring.attributes.enabled': 'true',
+
+  }
+%}
+
+{% set portal_directives = {
+  'max_input_vars': '15000',
+  'newrelic.browser_monitoring.attributes.enabled': 'true',
+  }
+%}
+
+{% set directives = salt['grains.filter_by']({
+  'base': {
+    'date.timezone': 'America/Denver',
+    'disable_functions': '',
+    'upload_max_filesize': '20M',
+    'memory_limit': '2048M',
+    'max_input_vars': '15000',
+    'sendmail_path': '"/usr/lib/sendmail -t -i -F system@entrata.com -f system@entrata.com"',
+    'session.gc_maxlifetime': '3600',
+    'session.gc_probability': '1',
+    'session.hash_function': '1',
+    'session.save_path': '"/tmp"',
+    'short_open_tag': 'On',
+    'error_reporting': 'E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT',
+    'error_log': 'syslog',
+    'post_max_size': '20M',
+    'ignore_repeated_errors': '1',
+    'expose_php': '0',
+    'max_execution_time': '30',
+    'mysqli.default_socket': '/var/run/mysqld/mysqld.sock',
+    'pdo_mysql.default_socket': '/var/run/mysqld/mysqld.sock',
+    'realpath_cache_size': '256k',
+    'opcache.max_accelerated_files': '16000',
+    'opcache.revalidate_freq': '30',
+    'opcache.memory_consumption': '1024',
+    'opcache.optimization_level': '0xFFFFFFFF',
+
+  },
+  'clientadmin': entrata_directives,
+  'entrata': entrata_directives,
+  'prospectportal': portal_directives,
+  'residentportal': portal_directives,
+
+}, grain='vhost', base='base' ) %}
